@@ -1,5 +1,6 @@
-
 from os import system
+from datetime import datetime
+from datetime import date
 clear = lambda : system("cls")
 global active_students
 global graduated_students
@@ -56,7 +57,10 @@ def add_student() :
     student["first_name"] = input("Enter student first name : ")
     student["last_name"] = input("Enter student last name : ")
     student["birthday"] = input("Enter student birthday (yyyy/mm/dd) : ")
-
+    if student["birthday"] != datetime.strptime(student["birthday"], "%Y/%m/%d").strftime('%Y/%m/%d'):
+        input("This is the incorrect date string format. It should be YYYY/MM/DD")
+        input("Press any key ...")
+        return
     code_melli = input("Enter code melli (10 digit number) : ")
     if len(code_melli) != 10 or check_duplicate_code_melli(code_melli) == False :
         print("Code Melli is a 10 Unique Characters code like : xxxxxxxxxx")
@@ -96,7 +100,7 @@ def find_student() :
             print(f"student average grade : {find_average(student['grades'])}")
             print(f"student max grade : {find_max(student['grades'])}")
             print(f"student min grade : {find_min(student['grades'])}")
-            print("student age : ")
+            print(f"student age : {int(date.today().strftime('%Y'))-int(datetime.strptime(student['birthday'], '%Y/%m/%d').strftime('%Y'))}")
             print("--------------------------------------")
             input()
             return     
@@ -117,7 +121,7 @@ def delete_student() :
             print(f"student average grade : {find_average(student['grades'])}")
             print(f"student max grade : {find_max(student['grades'])}")
             print(f"student min grade : {find_min(student['grades'])}")
-            print("student age : ")
+            print(f"student age : {int(date.today().strftime('%Y'))-int(datetime.strptime(student['birthday'], '%Y/%m/%d').strftime('%Y'))}")
             print("--------------------------------------")
             l = input("Do you want to completely delete or move?(D/M):")
             if l == "D":
@@ -147,7 +151,12 @@ def change_courses() :
                 student["last_name"] = input("Enter student last name : ")
             l = input("Do you want to change birthday?(Y/N):")
             if l == "Y":
-                student["birthday"] = input("Enter student birthday (yyyy/mm/dd) : ")
+                bir = input("Enter student birthday (yyyy/mm/dd) : ")
+                if bir != datetime.strptime(bir, "%Y/%m/%d").strftime('%Y/%m/%d'):
+                    input("This is the incorrect date string format. It should be YYYY/MM/DD")
+                    input("Press any key ...")
+                else : 
+                    student["birthday"]=bir
             l = input("Do you want to change code melli?(Y/N):")
             if l == "Y":
                 code_melli = input("Enter code melli (10 digit number) : ")
@@ -202,7 +211,7 @@ def list_students() :
         print(f"student average grade : {find_average(student['grades'])}")
         print(f"student max grade : {find_max(student['grades'])}")
         print(f"student min grade : {find_min(student['grades'])}")
-        print("student age : ")
+        print(f"student age : {int(date.today().strftime('%Y'))-int(datetime.strptime(student['birthday'], '%Y/%m/%d').strftime('%Y'))}")
         print("--------------------------------------")
     print("----------GRADUATED STUDENTS----------")
     for student in graduated_students :
@@ -214,7 +223,7 @@ def list_students() :
         print(f"student average grade : {find_average(student['grades'])}")
         print(f"student max grade : {find_max(student['grades'])}")
         print(f"student min grade : {find_min(student['grades'])}")
-        print("student age : ")
+        print(f"student age : {int(date.today().strftime('%Y'))-int(datetime.strptime(student['birthday'], '%Y/%m/%d').strftime('%Y'))}")
         print("--------------------------------------")
     input("Press any key ...")
 
