@@ -81,7 +81,7 @@ def add_student() :
     student["grades"]= list()
     while True:    
         student["courses"].append(input("Enter course name : "))
-        student["grades"].append(int(input("Enter grades : ")))
+        student["grades"].append(float(input("Enter grades : ")))
         l = input("Do you want to add more?(Y/N):")
         if l == "N":
             break
@@ -177,7 +177,7 @@ def change_courses() :
                 if l == "A":
                     while True:    
                         student["courses"].append(input("Enter course name : "))
-                        student["grades"].append(int(input("Enter grades : ")))
+                        student["grades"].append(float(input("Enter grades : ")))
                         l = input("Do you want to add more?(Y/N):")
                         if l == "N":
                             break
